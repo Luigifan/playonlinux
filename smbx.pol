@@ -1,9 +1,9 @@
 #!/bin/bash
 # Date : (2010-04-24 20-47)
-# Last revision : (2010-04-24 20-47)
-# Wine version used : 1.1.43
-# Distribution used to test : Arch Linux
-# Author : Matthew Bauer
+# Last revision : (2014-07-14 14-59)
+# Wine version used : 1.6.2
+# Distribution used to test : Linux Mint 17
+# Author : Matthew Bauer & Luigifan2010
 # License : GPLv3
 # Depend : 
 
@@ -11,46 +11,50 @@
 
 source "$PLAYONLINUX/lib/sources" 
 
-scriptauthor="Matthew Bauer & Luigifan2010"
+scriptauthor="Matthew Bauer and Luigifan2010"
 
+TITLE="Super Mario Brothers X"
+PREFIX="smbx"
 appname="Super Mario Brothers X"
 shortname="smbx"
 basesite="http://www.supermariobrosx.org"
 appversion="1.3.0.1"
 appcreator="Andrew Spinks 'Redigit' and others"
-zipname="SMBX 1.3.0.1.zip"
+zipname="smbx1301"
 #download="$basesite/$shortname/$zipname"
-download="http://download675.mediafire.com/mw1b33kw3nqg/ck64dz496ccce1g/SMBX+1.3.0.1.zip"
+download=" https://dl.dropboxusercontent.com/u/62304851/smbx1301.zip"
 
 POL_SetupWindow_Init
 
+POL_Debug_Init
+
 POL_SetupWindow_presentation "$appname" "$appcreator" "$basesite" "$scriptauthor" "$appname"
 
-select_prefix "$REPERTOIRE/wineprefix/$shortname/"
-POL_SetupWindow_prefixcreate
+POL_Wine_SelectPrefix $PREFIX
+POL_Wine_PrefixCreate "1.6.2"
 
 POL_SetupWindow_pulsebar "Installing base applications with winetricks" "Installing"
 
 POL_SetupWindow_pulse "1"
 
 cd "$REPERTOIRE/ressources/"
-#downloading winetricks
-if [ ! -e "winetricks" ]; then
-	wget http://winezeug.googlecode.com/svn/trunk/winetricks --output-document=winetricks
-fi
 
-POL_SetupWindow_pulse "33"
+POL_SetupWindow_pulse "23"
 bash winetricks -q vb6run
-POL_SetupWindow_pulse "66"
+POL_SetupWindow_pulse "55"
 bash winetricks -q quartz
+POL_SetupWindow_pulse "69"
+POL_Call POL_Install_vbrun6
 POL_SetupWindow_pulse "100"
 
 POL_SetupWindow_download "Downloading $appname" "$shortname" "$download"
 
-mkdir -p "$REPERTOIRE/drive_c/Program Files/$appname"
-unzip "$REPERTOIRE/ressources/$zipname" -d "drive_c/Program Files/$appname"
+POL_SetupWindow_wait "$(eval_gettext 'Unzipping downloaded files. Please wait.')" "$TITLE"
+echo $PREFIX
+mkdir -p "$REPERTOIRE/wineprefix/$shortname/drive_c/$shortname"
+unzip -o "$REPERTOIRE/ressources/$zipname" -d "$REPERTOIRE/wineprefix/$shortname/drive_c/$shortname"
 rm "$REPERTOIRE/ressources/$zipname"
 
-POL_SetupWindow_make_shortcut "$shortname" "Program Files/$appname" "$shortname.exe" "" "$appname" "" ""
+POL_Shortcut "$shortname.exe" "$TITLE" "" ""
 
 POL_SetupWindow_Close
