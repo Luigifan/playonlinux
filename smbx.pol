@@ -11,16 +11,16 @@
 
 source "$PLAYONLINUX/lib/sources" 
 
-scriptauthor="Matthew Bauer"
+scriptauthor="Matthew Bauer & Luigifan2010"
 
 appname="Super Mario Brothers X"
 shortname="smbx"
-basesite="http://www.supermariobrothers.org"
-appversion="1.2"
+basesite="http://www.supermariobrosx.org"
+appversion="1.3.0.1"
 appcreator="Andrew Spinks 'Redigit' and others"
-zipname="smbx12.zip"
+zipname="SMBX 1.3.0.1.zip"
 #download="$basesite/$shortname/$zipname"
-download="http://$shortname.dl.iad04s01-in-f99.bikcmp.com/$zipname"
+download="http://download675.mediafire.com/mw1b33kw3nqg/ck64dz496ccce1g/SMBX+1.3.0.1.zip"
 
 POL_SetupWindow_Init
 
