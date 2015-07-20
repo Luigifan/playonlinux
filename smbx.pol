@@ -1,7 +1,7 @@
 #!/bin/bash
 # Date : (2010-04-24 20-47)
 # Last revision : (2014-07-14 14-59)
-# Wine version used : 1.6.2
+# Wine version used : 1.7.45
 # Distribution used to test : Linux Mint 17
 # Author : Matthew Bauer & Luigifan2010
 # License : GPLv3
@@ -13,16 +13,16 @@ source "$PLAYONLINUX/lib/sources"
 
 scriptauthor="Matthew Bauer and Luigifan2010"
 
-TITLE="Super Mario Brothers X"
-PREFIX="smbx"
-appname="Super Mario Brothers X"
-shortname="smbx"
+TITLE="LunaLua"
+PREFIX="lunalua"
+appname="SMBX - LunaLua"
+shortname="lunalua"
 basesite="http://www.supermariobrosx.org"
-appversion="1.3.0.1"
-appcreator="Andrew Spinks 'Redigit' and others"
-zipname="smbx1301"
+appversion="1.3.0.2"
+appcreator="Andrew Spinks 'Redigit', Wohlstand, Kevsoft"
+zipname="lunalua-complete.zip"
 #download="$basesite/$shortname/$zipname"
-download=" https://dl.dropboxusercontent.com/u/62304851/smbx1301.zip"
+download="http://mrmiketheripper.x10.mx/lunalua/lunalua-complete.zip"
 
 POL_SetupWindow_Init
 
@@ -31,7 +31,7 @@ POL_Debug_Init
 POL_SetupWindow_presentation "$appname" "$appcreator" "$basesite" "$scriptauthor" "$appname"
 
 POL_Wine_SelectPrefix $PREFIX
-POL_Wine_PrefixCreate "1.6.2"
+POL_Wine_PrefixCreate "1.7.45"
 
 POL_SetupWindow_pulsebar "Installing base applications with winetricks" "Installing"
 
@@ -43,7 +43,9 @@ POL_SetupWindow_pulse "23"
 bash winetricks -q vb6run
 POL_SetupWindow_pulse "55"
 bash winetricks -q quartz
-POL_SetupWindow_pulse "69"
+POL_SetupWindow_pulse "65"
+bash winetricks -q vcrun2013
+POL_SetupWindow_pulse "79"
 POL_Call POL_Install_vbrun6
 POL_SetupWindow_pulse "100"
 
@@ -55,6 +57,6 @@ mkdir -p "$REPERTOIRE/wineprefix/$shortname/drive_c/$shortname"
 unzip -o "$REPERTOIRE/ressources/$zipname" -d "$REPERTOIRE/wineprefix/$shortname/drive_c/$shortname"
 rm "$REPERTOIRE/ressources/$zipname"
 
-POL_Shortcut "$shortname.exe" "$TITLE" "" ""
+POL_Shortcut "smbx.exe" "$TITLE" "" ""
 
 POL_SetupWindow_Close
