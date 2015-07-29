@@ -22,7 +22,7 @@ basesite="http://www.supermariobrosx.org"
 appversion="1.3.0.2"
 appcreator="Andrew Spinks 'Redigit', Wohlstand, Kevsoft"
 zipname="LunaLUA_0.7.0.2-beta_smbx13_sfx_mus_fullgame.zip"
-download="http://download.gna.org/pgewohlstand/dev/win32/LunaLUA/LunaLUA_0.7.0.2-beta_smbx13_sfx_mus_fullgame.zip"
+download="http://engine.wohlnet.ru/LunaLua/get.php?luaver=-1&installationType=Full&base=smbx13&fbase=1"
 
 POL_SetupWindow_Init
 
