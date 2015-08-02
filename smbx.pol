@@ -15,7 +15,7 @@ source "$PLAYONLINUX/lib/sources"
 scriptauthor="Matthew Bauer and Mike Santiago"
 
 TITLE="SMBX - LunaLua"
-PREFIX="smbx"
+PREFIX="lunalua"
 appname="SMBX - LunaLua"
 shortname="smbx"
 basesite="http://www.supermariobrosx.org"
@@ -33,29 +33,26 @@ POL_SetupWindow_presentation "$appname" "$appcreator" "$basesite" "$scriptauthor
 POL_Wine_SelectPrefix $PREFIX
 POL_Wine_PrefixCreate "1.7.45"
 
-POL_SetupWindow_pulsebar "Installing base applications with winetricks" "Installing"
+POL_SetupWindow_pulsebar "$(eval_gettext 'Installing base applications with winetricks')" "$(eval_gettext 'Installing')"
 
 POL_SetupWindow_pulse "1"
 
-cd "$REPERTOIRE/ressources/"
+cd "$POL_USER_ROOT/tmp/"
 
 POL_SetupWindow_pulse "23"
-bash winetricks -q vb6run
-POL_SetupWindow_pulse "55"
-bash winetricks -q quartz
-POL_SetupWindow_pulse "65"
-bash winetricks -q vcrun2013
-POL_SetupWindow_pulse "79"
 POL_Call POL_Install_vbrun6
+POL_SetupWindow_pulse "55"
+POL_Call POL_Install_quartz
+POL_SetupWindow_pulse "65"
+POL_Call POL_Install_vcrun2013
 POL_SetupWindow_pulse "100"
 
-POL_SetupWindow_download "Downloading $appname" "$shortname" "$download"
+POL_Download "$download"
 
 POL_SetupWindow_wait "$(eval_gettext 'Unzipping downloaded files. Please wait.')" "$TITLE"
-echo $PREFIX
-mkdir -p "$REPERTOIRE/wineprefix/$shortname/drive_c/$shortname"
-unzip -o "$REPERTOIRE/ressources/$zipname" -d "$REPERTOIRE/wineprefix/$shortname/drive_c/$shortname"
-rm "$REPERTOIRE/ressources/$zipname"
+#echo $PREFIX
+#mkdir -p "$REPERTOIRE/wineprefix/$shortname/drive_c/$shortname"
+POL_System_unzip "$REPERTOIRE/ressources/$zipname" -d "$wineprefix/$shortname"
 
 POL_Shortcut "smbx.exe" "$TITLE" "" ""
 
